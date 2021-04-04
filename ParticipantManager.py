@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import csv
+import os.path
 
 class Player:
     def __init__(self, videourl = ''):
@@ -20,7 +21,7 @@ class Team(dict[str,Player]):
 class Participant(dict[str,Team]):
     pass
 
-def readFile(filepath = './ParticipantList.txt'):
+def readFile(filepath = os.path.expanduser('~/ParticipantList.txt')):
     ret = Participant()
 
     with open(filepath, 'r',encoding="utf-8_sig") as fd:
