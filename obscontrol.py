@@ -9,9 +9,10 @@ async def set_sceneitem_size(conn, scene_id, item_id, width, height):
     scene = await ss.get_scene(scene_id)
     item = await scene.get_item(item_id)
     source = await item.get_source()
-    x_scale = float(width) / float(source.width)
-    y_scale = float(height) / float(source.height)
-    await item.set_scale(slobs.IVec2(x_scale, y_scale))
+    if source.width != 0 and source.height !=0:
+        x_scale = float(width) / float(source.width)
+        y_scale = float(height) / float(source.height)
+        await item.set_scale(slobs.IVec2(x_scale, y_scale))
     await conn.close()
 
 
