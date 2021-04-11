@@ -18,7 +18,7 @@ class ManyBuutonsPacker:
 class ScrollableFrame(ttk.Frame):
     def __init__(self, container, bar_x = True, bar_y = True):
         super().__init__(container)
-        self.canvas = tk.Canvas(self)
+        self.canvas = tk.Canvas(self, width=1080, height=720)
         self.scrollable_frame = ttk.Frame(self.canvas)
         self.scrollable_frame.bind(
             "<Configure>",
