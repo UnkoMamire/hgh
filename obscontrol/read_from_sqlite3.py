@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 
-import obscontrol
+import .main
 
 import sqlite3
+from os.path import expanduser
 
 obs = obscontrol.ObsControl()
 
@@ -55,7 +56,7 @@ class MyItem:
         obs.set_sceneitem_position(self.scene.id, self.item_id, self.__position_x, self.__position_y)
 
 
-def read_db(db_file: str):
+def read_db(db_file = expanduser('~/myobs.sqlite3'): str):
     ret = dict()
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
