@@ -8,6 +8,7 @@ from os.path import expanduser
 class MyScene(list):
     def __init__(self, obs: ObsControl, scene_name: str, scene_id: str, *items):
         super().__init__(*items)
+        self.__obs = obs
         self.__name = scene_name
         self.__id = scene_id
 
@@ -23,6 +24,7 @@ class MyScene(list):
 class MyItem:
     def __init__(self, obs: ObsControl, scene: MyScene, item_name: str, item_id: str, source_id: str,
             position_x: int, position_y: int, size_width: int, size_height: int):
+        self.__obs = obs
         self.__scene = scene
         self.__name = item_name
         self.__item_id = item_id
@@ -49,8 +51,8 @@ class MyItem:
         return self.__source_id
 
     def align(self):
-        obs.set_sceneitem_size(self.scene.id, self.item_id, self.__size_width, self.__size_height)
-        obs.set_sceneitem_position(self.scene.id, self.item_id, self.__position_x, self.__position_y)
+        self.__obs.set_sceneitem_size(self.scene.id, self.item_id, self.__size_width, self.__size_height)
+        self.__obs.set_sceneitem_position(self.scene.id, self.item_id, self.__position_x, self.__position_y)
 
 
 def read_db(db_file: str = expanduser('~/myobs.sqlite3')):
