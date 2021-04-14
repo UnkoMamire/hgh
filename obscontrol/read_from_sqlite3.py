@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 
-import .main
+from .main import *
 
 import sqlite3
 from os.path import expanduser
 
-obs = obscontrol.ObsControl()
-
-
 class MyScene(list):
-    def __init__(self, scene_name: str, scene_id: str, *items):
+    def __init__(self, obs: ObsControl, scene_name: str, scene_id: str, *items):
         super().__init__(*items)
         self.__name = scene_name
         self.__id = scene_id
@@ -24,7 +21,7 @@ class MyScene(list):
 
 
 class MyItem:
-    def __init__(self, scene: MyScene, item_name: str, item_id: str, source_id: str,
+    def __init__(self, obs: ObsControl, scene: MyScene, item_name: str, item_id: str, source_id: str,
             position_x: int, position_y: int, size_width: int, size_height: int):
         self.__scene = scene
         self.__name = item_name
@@ -58,24 +55,20 @@ class MyItem:
 
 def read_db(db_file = expanduser('~/myobs.sqlite3'): str):
     ret = dict()
+    obs = ObsControl()
     conn = sqlite3.connect(db_file)
     cur = conn.cursor()
 
     cur.execute('select name, id from scene')
     for row in cur:
         scene_name, scene_id = row
-        ret[scene_name] = MyScene(scene_name, scene_id)
+        ret[scene_name] = MyScene(obs, scene_name, scene_id)
 
     cur.execute('select scene.name, scene_id, item_name, item_id, source_id, position_x, position_y, size_width, size_height from item innner join scene on scene_id = scene.id')
     for row in cur:
         scene_name = row[0]
-        newitem = MyItem(*row[1:])
-        # ret[scene_name] = newitem
+        newitem = MyItem(obs, *row[1:])
         ret[scene_name].append(newitem)
 
     conn.close()
     return ret
-
-
-
-
