@@ -54,6 +54,9 @@ class MyItem:
         self.__obs.set_sceneitem_size(self.scene_id, self.item_id, self.__size_width, self.__size_height)
         self.__obs.set_sceneitem_position(self.scene_id, self.item_id, self.__position_x, self.__position_y)
 
+    def seturl(self, url: str):
+        self.__obs.change_source_input(self.__source_id, url)
+
 
 def read_db(db_file: str = expanduser('~/myobs.sqlite3')):
     ret = dict()

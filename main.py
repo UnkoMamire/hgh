@@ -2,23 +2,22 @@
 
 import ParticipantManager
 import ui
-import delivery
+import obscontrol
 import copy
 import utils
 
 import functools as ft
 import copy as cp
 
-def onlyOne(teams, u, desc, text):
-    d = delivery._FewStreamManager(desc, 1)
+def onlyOne(teams, u, scene, text):
 
     tab = u.addTab(text)
-    fr = ui.FrameDesignerD(tab, d.reset, lambda: print("トランジションした体"))
+    fr = ui.FrameDesignerD(tab, scene[0].seturl(''), lambda: print("トランジションした体"))
 
     for i in teams:
         for j in teams[i]:
             url = teams[i][j].videoURL
-            cmd = d.reset if url is None else utils.fpf(d.reset, ft.partial(d.setURL, cp.copy(url)))
+            cmd = scene[0].seturl('') if url is None else utils.fpf(scene[0].seturl(''), ft.partial(scene[0].seturl(url), cp.copy(url)))
             fr.add(text = '{0} - {1}'.format(i, j), command = cmd)
 
     return tab
