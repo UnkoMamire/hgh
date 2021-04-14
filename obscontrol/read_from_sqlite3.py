@@ -53,7 +53,7 @@ class MyItem:
         obs.set_sceneitem_position(self.scene.id, self.item_id, self.__position_x, self.__position_y)
 
 
-def read_db(db_file = expanduser('~/myobs.sqlite3'): str):
+def read_db(db_file: str = expanduser('~/myobs.sqlite3')):
     ret = dict()
     obs = ObsControl()
     conn = sqlite3.connect(db_file)
