@@ -22,10 +22,10 @@ class MyScene(list):
 
 
 class MyItem:
-    def __init__(self, obs: ObsControl, scene: MyScene, item_name: str, item_id: str, source_id: str,
+    def __init__(self, obs: ObsControl, scene_id: str, item_name: str, item_id: str, source_id: str,
             position_x: int, position_y: int, size_width: int, size_height: int):
         self.__obs = obs
-        self.__scene = scene
+        self.__scene_id = scene_id
         self.__name = item_name
         self.__item_id = item_id
         self.__source_id = source_id
@@ -35,8 +35,8 @@ class MyItem:
         self.__size_height = size_height
 
     @property
-    def scene(self):
-        return self.__scene
+    def scene_id(self):
+        return self.__scene_id
 
     @property
     def name(self):
@@ -51,8 +51,8 @@ class MyItem:
         return self.__source_id
 
     def align(self):
-        self.__obs.set_sceneitem_size(self.scene.id, self.item_id, self.__size_width, self.__size_height)
-        self.__obs.set_sceneitem_position(self.scene.id, self.item_id, self.__position_x, self.__position_y)
+        self.__obs.set_sceneitem_size(self.scene_id, self.item_id, self.__size_width, self.__size_height)
+        self.__obs.set_sceneitem_position(self.scene_id, self.item_id, self.__position_x, self.__position_y)
 
 
 def read_db(db_file: str = expanduser('~/myobs.sqlite3')):
