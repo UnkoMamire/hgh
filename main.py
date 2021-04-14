@@ -3,6 +3,7 @@
 import ParticipantManager
 import ui
 import obscontrol
+import delivery
 import copy
 import utils
 
@@ -83,8 +84,9 @@ def imptabCreate(teams: ParticipantManager.Participant, u: ui.tk.Widget):
 
     imptab = list()
 
-    imptab.append(onlyOne(teams, u, 49513, '一人視点 A'))
-    imptab.append(onlyOne(teams, u, 49514, '一人視点 B'))
+    db = obscontrol.read_db()
+    imptab.append(onlyOne(teams, u, db['1a'], '一人視点 A'))
+    imptab.append(onlyOne(teams, u, db['1b'], '一人視点 B'))
 
     imptab.append(OnevOne(teams, u, 49515, '1vs1 A'))
     imptab.append(OnevOne(teams, u, 49517, '1vs1 B'))
