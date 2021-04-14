@@ -18,7 +18,7 @@ def onlyOne(teams, u, scene, text):
     for i in teams:
         for j in teams[i]:
             url = teams[i][j].videoURL
-            cmd = scene[0].seturl('') if url is None else utils.fpf(scene[0].seturl(''), ft.partial(scene[0].seturl(url), cp.copy(url)))
+            cmd = scene[0].seturl('') if url is None else utils.fpf(scene[0].seturl(''), ft.partial(scene[0].seturl, cp.copy(url)))
             fr.add(text = '{0} - {1}'.format(i, j), command = cmd)
 
     return tab
