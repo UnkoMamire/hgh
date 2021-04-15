@@ -65,13 +65,13 @@ def TowvTow(teams, u, desc, text, scene):
     d = delivery._ManySteamManager(desc, 2, 2)
 
     tab = u.addTab(text)
-    fr = ui.FrameDesignerA(tab, d.reset, lambda: print('トランジションした体'))
+    fr = ui.FrameDesignerA(tab, d.reset, ft.partial(trainsition, scene))
 
     for i in teams:
 
         mem = teams[i].keys()
 
-        def cmd(team, *selmem, scene):
+        def cmd(team, *selmem):
             d.setURL(id(team), *[team[j].videoURL for j in selmem])
 
         fr.add(text=i, command=ft.partial(cmd, cp.copy(teams[i])), member=mem)
