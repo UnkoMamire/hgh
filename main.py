@@ -11,8 +11,8 @@ import functools as ft
 import copy as cp
 
 
-def trainsition(scene: dict):
-    for item in scene.values():
+def trainsition(scene: list):
+    for item in scene():
         item.align()
 
 
