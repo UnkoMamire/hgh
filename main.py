@@ -12,7 +12,7 @@ import copy as cp
 
 
 def trainsition(scene: list):
-    for item in scene():
+    for item in scene:
         item.align()
 
 
