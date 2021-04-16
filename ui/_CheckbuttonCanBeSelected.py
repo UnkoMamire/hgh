@@ -59,14 +59,14 @@ class OnlyOneCheckbuttonCanBeSelected(_CheckbuttonCanBeSelected):
 class OnlyTowCheckbuttonCanBeSelected(_CheckbuttonCanBeSelected):
     def __init__(self, master: tk.Widget):
         super().__init__(master)
-        self.__selected = set()
+        self.__selected = list()
 
     def __checkbuttonSelected(self, cb):
-        self.__selected.add(cb)
+        self.__selected.append(cb)
 
     def __checkbuttonDeselected(self, cb):
         _deselectCheckbutton(cb)
-        self.__selected.discard(cb)
+        self.__selected.remove(cb)
 
     def __selectCommand(self, cb, cmd):
         if len(self.__selected) < 2:
