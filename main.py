@@ -72,6 +72,7 @@ def TowvTow(teams, u, desc, text, scene):
         mem = teams[i].keys()
 
         def cmd(team, *selmem):
+            print(selmem)
             d.setURL(id(team), *[team[j].videoURL for j in selmem])
 
         fr.add(text=i, command=ft.partial(cmd, cp.copy(teams[i])), member=mem)
