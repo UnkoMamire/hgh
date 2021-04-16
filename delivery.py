@@ -25,9 +25,9 @@ class _FewStreamManager:
 
 class _ManySteamManager:
     def __init__(self, basedesc, quantity1, quantity2):
-        self.__waiting = set()
+        self.__waiting = list()
         for i in range(quantity1):
-            self.__waiting.add(_FewStreamManager(basedesc+(i*quantity2), quantity2))
+            self.__waiting.append(_FewStreamManager(basedesc+(i*quantity2), quantity2))
         self.__used = dict()
 
     def setURL(self, key, *urls):
@@ -37,6 +37,6 @@ class _ManySteamManager:
         self.__used[key].setURL(*urls)
 
     def reset(self):
-        for k in list(self.__used):
+        for k in reversed(list(self.__used)):
             self.__used[k].reset()
-            self.__waiting.add(self.__used.pop(k))
+            self.__waiting.append(self.__used.pop(k))
