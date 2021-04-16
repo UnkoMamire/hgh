@@ -7,7 +7,7 @@ class SLManager:
         self.__slset = {}
 
     def start(self, desc, url):
-        proc = subprocess.Popen(['streamlink', url, 'best' , '--player-external-http', '--player-external-http-port', str(desc), '--twitch-disable-ads'])
+        proc = subprocess.Popen(['streamlink', url, '720p,720p60,480p,best' , '--player-external-http', '--player-external-http-port', str(desc), '--twitch-disable-ads'])
         self.stop(desc)
         self.__slset[desc] = proc
 
