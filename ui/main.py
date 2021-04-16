@@ -137,10 +137,17 @@ class UI(tk.Tk):
         self.__notebook = ttk.Notebook(self)
         self.__notebook.pack()
         self.__cmdlist = {}
+        def tab_changed(_):
+            if len(self.__cmdlist) != 0:
+                cmd = self.__cmdlist[self.__notebook.select()]
+                if cmd is not None:
+                    cmd()
+        self.bind('<<NotebookTabChanged>>', tab_changed)
         self.__openingtab = None
 
     def addTab(self, text = '', openfunc = None, closefunc = None):
         frame = tk.Frame(self.__notebook)
         self.__notebook.add(frame, text = text)
+        self.__cmdlist[self.__notebook.tabs()[self.__notebook.index('end')-1]] = openfunc
         return frame
 
