@@ -11,7 +11,7 @@ class SLManager:
         parsed_url = urlparse(url)
         if parsed_url.netloc == 'www.youtube.com' or parsed_url.netloc == 'www.twitch.tv':
             proc = subprocess.Popen(['streamlink', url, '720p,720p60,480p,best' , '--player-external-http', '--player-external-http-port', str(desc), '--twitch-disable-ads'])
-        else if parsed_url.netloc == 'do8w5ym3okkik.cloudfront.net':
+        elif parsed_url.netloc == 'do8w5ym3okkik.cloudfront.net':
             proc = subprocess.Popen(['ffmpegserver.py', str(desc), url, 'Referer: https://www.mildom.com/'])
         else:
             proc = subprocess.Popen(['ffmpegserver.py', str(desc), url])
